@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
+import {connect } from 'react-redux';
+import { itemsFetchData } from '../actions/items';
 
 class ItemList extends Component {
 	constructor () {

@@ -17,8 +17,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 // Get products
 app.get('/api/items', function (req, res) {
 	fs.readFile(PRODUCTS_FILE, function (err, data) {
-		res.setHeader('Cache-Control', 'co-cache');
-		res.json(JSON.parse(data));
+		setTimeout(function () {
+			res.setHeader('Cache-Control', 'co-cache');
+			res.json(JSON.parse(data));
+		}, 500)
 	});
 });
 
