@@ -1,31 +1,34 @@
 import React, { Component } from 'react';
+import 'whatwg-fetch';
 
 class ItemList extends Component {
 	constructor () {
 		super();
 
 		this.state = {
-			items: [
-				{
-						"id": 1,
-						"label": "List item 1"
-				},
-				{
-						"id": 2,
-						"label": "List item 2"
-				},
-				{
-						"id": 3,
-						"label": "List item 3"
-				},
-				{
-						"id": 4,
-						"label": "List item 4"
-				}
-			],
+			items: [],
 			hasErrored: false,
 			isLoading: false
 		};
+	}
+
+	fetchData (url) {
+		this.setState({ isLoading: true });
+		fetch(url).then(response => {
+			if (!response.ok) {
+				throw Error(response.statusText);
+			}
+
+			this.setState({ isLoading: false});
+			return response;
+		})
+		.then(response => response.json())
+		.then(items => this.setState({ items }))
+		.catch(() => this.setState( {hasErrored: true}));
+	}
+
+	componentDidMount () {
+		this.fetchData('/api/items');
 	}
 
 	render () {
