@@ -55,12 +55,8 @@ class ItemList extends Component {
 
 	render () {
 		if (this.state.hasErrored) {
-			return (<p>Sorry! There was an error loading the items</p>);
+			return (<p>Sorry! There was an error during loading. Please, try later.</p>);
 		}
-
-		if (this.state.isLoading) {
-			return (<p>Loading...</p>);
-        }
 
         const increment = (item) => (e) => {
             ++item.diamonds;
@@ -72,29 +68,33 @@ class ItemList extends Component {
             --item.diamonds;
             this.updateItemData(`/api/items/${item.id}`, item);
         };
-
+        
+        const loading = (this.state.isLoading) ? (<p className="loader">Loading...</p>) : null;
 		return (
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Diamonds</th>
-                        <th>Modify</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.items.map( item => (
-                        <tr key={ item.id }>
-                            <td>{ item.name }</td>
-                            <td>{ item.diamonds }</td>
-                            <td>
-                                <button type="button" className="mod-button" onClick={ increment(item) }>+</button>
-                                <button type="button" className="mod-button" onClick={ decrement(item) }>-</button>
-                            </td>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Diamonds</th>
+                            <th>Modify</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {this.state.items.map( item => (
+                            <tr key={ item.id }>
+                                <td>{ item.name }</td>
+                                <td>{ item.diamonds }</td>
+                                <td>
+                                    <button type="button" className="mod-button" onClick={ increment(item) }>+</button>
+                                    <button type="button" className="mod-button" onClick={ decrement(item) }>-</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                { loading }
+            </div>
 		);
 	}
 }
