@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-import {connect } from 'react-redux';
+//import {connect } from 'react-redux';
 import { itemsFetchData } from '../actions/items';
 
 class ItemList extends Component {
@@ -40,16 +40,40 @@ class ItemList extends Component {
 
 		if (this.state.isLoading) {
 			return (<p>Loading...</p>);
-		}
+        }
+
+        const modStyle = { padding: "0 10px", cursor: "pointer" };
+
+        const increment = (item) => (e) => {
+            console.log('increment', item);
+        };
+
+        const decrement = (item) => (e) => {
+            console.log('decrement', item);
+        };
 
 		return (
-			<ul>
-				{this.state.items.map(item => (
-					<li key={item.id}>
-						{item.label}
-					</li>
-				))}
-			</ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Diamond</th>
+                        <th>Modify</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.state.items.map( item => (
+                        <tr key={ item.id }>
+                            <td>{ item.name }</td>
+                            <td>{ item.diamonds }</td>
+                            <td>
+                                <span style={ modStyle } onClick={ increment(item) }>+</span>
+                                <span style={ modStyle } onClick={ decrement(item) }>-</span>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 		);
 	}
 }
