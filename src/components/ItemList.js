@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-//import {connect } from 'react-redux';
-import { itemsFetchData, itemsUpdateData } from '../actions/items';
-
-const ITEMS_URL = '/api/items';
 
 class ItemList extends Component {
 	constructor () {

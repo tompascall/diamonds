@@ -1,7 +1,7 @@
 {
-  "name": "simple-redux-app",
+  "name": "diamonds",
   "version": "1.0.0",
-  "description": "simple redux app",
+  "description": "App for counting and storing diamonds",
   "main": "server.js",
   "dependencies": {
     "babel-loader": "^6.2.7",
@@ -13,7 +13,6 @@
     "gulp-babel": "^6.1.2",
     "react": "*",
     "react-dom": "^15.3.2",
-    "react-redux": "^5.0.5",
     "webpack-stream": "*",
     "whatwg-fetch": "^2.0.1"
   },
@@ -22,9 +21,5 @@
     "start": "node server.js"
   },
   "author": "gttamas",
-  "license": "ISC",
-  "devDependencies": {
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
-  }
+  "license": "ISC"
 }
