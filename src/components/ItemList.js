@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
 //import {connect } from 'react-redux';
-import { itemsFetchData } from '../actions/items';
+import { itemsFetchData, itemsUpdateData } from '../actions/items';
+
+const ITEMS_URL = '/api/items';
 
 class ItemList extends Component {
 	constructor () {
@@ -29,6 +31,28 @@ class ItemList extends Component {
 		.catch(() => this.setState( {hasErrored: true}));
 	}
 
+    updateItemData (url, item) {
+		this.setState({ isLoading: true });
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+
+			this.setState({ isLoading: false});
+            return response;
+        })
+        .then( response => response.json() )
+		.then(items => this.setState({ items }))
+		.catch(() => this.setState( {hasErrored: true}));
+    }
+
 	componentDidMount () {
 		this.fetchData('/api/items');
 	}
@@ -45,11 +69,14 @@ class ItemList extends Component {
         const modStyle = { padding: "0 10px", cursor: "pointer" };
 
         const increment = (item) => (e) => {
-            console.log('increment', item);
+            ++item.diamonds;
+            this.updateItemData(`/api/items/${item.id}`, item);
+            
         };
 
         const decrement = (item) => (e) => {
-            console.log('decrement', item);
+            --item.diamonds;
+            this.updateItemData(`/api/items/${item.id}`, item);
         };
 
 		return (

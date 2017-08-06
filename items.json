@@ -1,12 +1,12 @@
 [
-	{
-			"id": 1,
-            "name": "Andor",
-			"diamonds": 5
-	},
-	{
-			"id": 2,
-			"name": "Vince",
-            "diamonds": 5
-	}
+   {
+      "id": 1,
+      "name": "Andor",
+      "diamonds": 6
+   },
+   {
+      "id": 2,
+      "name": "Vince",
+      "diamonds": 6
+   }
 ]

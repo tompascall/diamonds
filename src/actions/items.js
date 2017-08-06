@@ -36,3 +36,27 @@ export function itemsFetchData (url) {
 			.catch( () => dispatch(itemsHasErrored(true)));
 	})
 }
+
+export function itemsUpdateData (url, items) {
+    return (dispatch => {
+        dispatch(itemsIsLoading(true));
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(items)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+
+            dispatch(itemsIsLoading(false));
+            return response;
+        })
+        .then( response => response.json() )
+        .then( items => dispatch(itemsFetchDataSuccess) )
+        .catch( () => dispatch(itemsHasErrored(true)));
+    });
+}
