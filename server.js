@@ -29,10 +29,9 @@ app.post('/api/items', function (req, res) {
 	fs.readFile(PRODUCTS_FILE, function (err, data) {
 		let items = JSON.parse(data);
 		items.push(req.body);
-		console.log('items', items);
-		fs.writeFile(PRODUCTS_FILE, JSON.stringify(products, null, 3), function (err) {
+		fs.writeFile(PRODUCTS_FILE, JSON.stringify(items, null, 3), function (err) {
 			res.setHeader('Cache-Control', 'co-cache');
-			res.json(products);
+			res.json(items);
 		})
 	});
 });

@@ -1,6 +1,6 @@
 export function itemsHasErrored (state = false, action) {
 	switch (action.type) {
-		case 'ITEMS_HAS_ERRORED:
+		case 'ITEMS_HAS_ERRORED':
 			return action.hasErrored;
 			break;
 		default:
