@@ -62,8 +62,6 @@ class ItemList extends Component {
 			return (<p>Loading...</p>);
         }
 
-        const modStyle = { padding: "0 10px", cursor: "pointer" };
-
         const increment = (item) => (e) => {
             ++item.diamonds;
             this.updateItemData(`/api/items/${item.id}`, item);
@@ -80,7 +78,7 @@ class ItemList extends Component {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Diamond</th>
+                        <th>Diamonds</th>
                         <th>Modify</th>
                     </tr>
                 </thead>
@@ -90,8 +88,8 @@ class ItemList extends Component {
                             <td>{ item.name }</td>
                             <td>{ item.diamonds }</td>
                             <td>
-                                <span style={ modStyle } onClick={ increment(item) }>+</span>
-                                <span style={ modStyle } onClick={ decrement(item) }>-</span>
+                                <button type="button" className="mod-button" onClick={ increment(item) }>+</button>
+                                <button type="button" className="mod-button" onClick={ decrement(item) }>-</button>
                             </td>
                         </tr>
                     ))}

@@ -34,7 +34,7 @@ gulp.task('copy', function () {
 });
 
 gulp.task('watch', function () {
-	gulp.watch(['src/**/*.js','src/**/*.jsx'], ['scripts', 'copy']);
+    gulp.watch(['src/**/*.js','src/**/*.jsx', 'src/**/*.css'], ['scripts', 'copy']);
 });
 
 gulp.task('default', ['scripts', 'copy', 'watch']);
